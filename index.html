@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">标题</h1>
+		</header>
+
+		<div class="mui-content">
+		    
+			Webview窗口页面加载完成事件<br/>
+			 点击窗口关闭遮罩层<br/>
+			 
+			<ul class="mui-table-view mui-table-view-chevron">
+				
+				<li class="mui-table-view-cell mui-plus-visible">
+					<a class="mui-navigate-right" open-type="common" href="example/mask-h5-main.html">
+						遮罩蒙版&nbsp;&nbsp;[H5+]
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell mui-plus-visible">
+					<a class="mui-navigate-right" open-type="common" href="example/mask-mui-main.html">
+						遮罩蒙版&nbsp;&nbsp;[MUI封装]
+					</a>
+				</li>
+				
+				
+				<li class="mui-table-view-cell mui-plus-visible">
+					<a class="mui-navigate-right" open-type="common" href="example/drag-h5-main.html">
+						侧滑功能&nbsp;&nbsp;[H5+遮罩蒙版]
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell mui-plus-visible">
+					<a class="mui-navigate-right" open-type="common" href="example/drag-main-move-main.html">
+						侧滑方式1&nbsp;&nbsp;[主界面移动，菜单不动]
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell mui-plus-visible">
+					<a class="mui-navigate-right" open-type="common" href="example/drag-menu-move-main.html">
+						侧滑方式2&nbsp;&nbsp;[主界面不动，菜单移动]
+					</a>
+				</li>
+				
+				<li class="mui-table-view-cell mui-plus-visible">
+					<a class="mui-navigate-right" open-type="common" href="example/offcanvas-drag-right-plus-main.html">
+						webview模式右滑菜单
+					</a>
+				</li>
+				
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			var ws = null;
+			
+			var newHelpWebView = [];
+			// H5 plus事件处理
+			function plusReady() {
+				ws = plus.webview.currentWebview();
+				// 显示遮罩层
+				ws.setStyle({
+					mask: "rgba(0,0,0,0.5)"
+				});
+				
+				var newHelpArr = ["new-help-add.html", "new-help-handove.html"];
+				initNewHelpWv(newHelpArr);
+				
+				// 显示第一个新手引导页
+				showNewHelp(newHelpWebView[0]);
+
+				// 点击关闭遮罩层
+				ws.addEventListener("maskClick", function() {
+					ws.setStyle({
+						mask: "none"
+					});
+				}, false);
+				
+			}
+			
+			if (window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener("plusready", plusReady, false);
+			}
+			
+			
+			function initNewHelpWv(newHelpArr) {
+				for(var i=0,len=newHelpArr.length; i<len; i++) {
+					var preWebView = mui.preload({
+						id: newHelpArr[i],
+						url: newHelpArr[i],
+						styles: {
+							left: 0,		// 窗口水平向右的偏移量
+							width: '100%',
+							height: '100%',
+							background: "transparent"
+						}
+					});
+					
+					newHelpWebView.push(preWebView);
+				}
+			}
+			
+
+			function showNewHelp(newHelpWv) {
+				newHelpWv.show('none', 0, function() {
+					
+				});
+			}
+			
+			
+			window.addEventListener("closeMask", function(event) {
+				ws.setStyle({
+					mask: "none"
+				});
+			});
+			
+			var newHelpIndex = 1;
+			window.addEventListener("showNext", function(event) {
+				newHelpWebView[newHelpIndex-1].close();
+				if(newHelpWebView.length === newHelpIndex) {
+					ws.setStyle({
+						mask: "none"
+					});
+					return;
+				}
+				showNewHelp(newHelpWebView[newHelpIndex++]);
+			});
+			
+			
+			mui("ul").on("tap", "a", function() {
+				var id = this.getAttribute('href');
+				var href = this.href;
+				var type = this.getAttribute("open-type");
+				//不使用父子模板方案的页面
+				if (type == "common") {
+					var webview_style = {
+						popGesture: "close"
+					};
+					//侧滑菜单需动态控制一下zindex值；
+					if (~id.indexOf('offcanvas-')) {
+						webview_style.zindex = 9998;
+						webview_style.popGesture = ~id.indexOf('offcanvas-with-right') ? "close" : "none";
+					}
+					mui.openWindow({
+						id: id,
+						url: this.href,
+						styles: webview_style,
+						waiting: {
+							autoShow: false
+						}
+					});
+				}
+				
+			});
+			
+		</script>
+	</body>
+
+</html>

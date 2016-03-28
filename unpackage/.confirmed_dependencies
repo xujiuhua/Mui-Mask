@@ -1,0 +1,133 @@
+{
+	"example/offcanvas-drag-right-plus-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"example/offcanvas-drag-right-plus-menu.html"
+		]
+	},
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"fonts/mui.ttf",
+			"example/offcanvas-drag-right-plus-main.html"
+		],
+		"refer": [
+			"example/offcanvas-drag-right-plus-main.html",
+			"example/mui-main.html",
+			"example/main.html",
+			"example/mask-h5-main.html",
+			"example/mask-mui-main.html",
+			"example/drag-h5-main.html",
+			"new-help.html",
+			"new-help-handove.html",
+			"new-help-add.html",
+			"example/drag-main-move-main.html",
+			"example/drag-menu-move-main.html"
+		]
+	},
+	"example/main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"example/mui-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"example/mask-h5-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"example/mask-h5-menu.html"
+		]
+	},
+	"example/mask-h5-menu.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"example/drag-h5-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"example/drag-h5-menu.html"
+		]
+	},
+	"example/drag-h5-menu.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"example/offcanvas-drag-right-plus-menu.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		]
+	},
+	"new-help.html": {
+		"resources": [
+			"images/guide-add.png",
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"new-help-handove.html": {
+		"resources": [
+			"images/guide-handove.png",
+			"js/mui.min.js"
+		]
+	},
+	"new-help-add.html": {
+		"resources": [
+			"images/guide-add.png",
+			"js/mui.min.js"
+		]
+	},
+	"example/mask-mui-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css"
+		]
+	},
+	"example/drag-main-move-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"example/drag-main-move-menu.html"
+		]
+	},
+	"example/drag-menu-move-main.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"example/drag-menu-move-menu.html"
+		]
+	}
+}

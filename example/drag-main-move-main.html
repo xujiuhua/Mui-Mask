@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>主界面</title>
+    <script src="../js/mui.min.js"></script>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="UTF-8">
+      	mui.init();
+    </script>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">
+	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	    <h1 class="mui-title">主界面移动，菜单不动</h1>
+	</header>
+	<div class="mui-content">
+	    这是主界面
+	    <br />
+	    <button id="show-btn" class="mui-btn-green">显示侧滑菜单</button>
+	</div>
+	
+	<script type="text/javascript">
+		var main = null,
+			menu = null;
+		var showMenu = false;
+		
+		mui.plusReady(function() {
+			main = plus.webview.currentWebview();
+			main.setStyle({
+				zindex: 2
+			});
+			main.addEventListener('maskClick', closeMenu);
+			//处理侧滑导航，为了避免和子页面初始化等竞争资源，延迟加载侧滑页面；
+			setTimeout(function() {
+				menu = mui.preload({
+					id: 'drag-main-move-menu',
+					url: 'drag-main-move-menu.html',
+					styles: {
+						left: 0,		// 窗口水平向右的偏移量
+						width: '70%',
+						zindex: 1
+					},
+					show: {
+						aniShow: 'none'
+					}
+				});
+			}, 200);
+		});
+		
+		function closeMenu() {
+			if(showMenu) {
+				main.setStyle({
+					mask: 'none',
+					left: 0
+				});
+				showMenu = false;
+				setTimeout(function() {
+					menu.hide();
+				}, 200);
+			}
+		}
+		
+		function openMenu() {
+			if(!showMenu) {
+				// 设置透明遮罩，防止菜单页被点击，
+				// 因为菜单页是隐藏在后面，不加透明遮罩有可能点击。
+				// 当菜单界面显示出来时，去掉遮罩
+				menu.setStyle({
+					mask: 'rgba(0,0,0,0)'
+				});
+				
+				menu.show('none', 0, function() {
+					//主窗体开始侧滑并显示遮罩
+					main.setStyle({
+						mask: 'rgba(0,0,0,0.4)',	// 显示遮罩
+						left: '70%'				    // 窗口水平向右的偏移量
+					});
+					menu.setStyle({
+						mask: 'none'
+					});
+					showMenu = true;
+				});
+			}
+		}
+		
+		// 点击打开侧滑菜单
+		document.getElementById("show-btn").addEventListener("tap", function() {
+			openMenu();
+		});
+	</script>
+</body>
+</html>

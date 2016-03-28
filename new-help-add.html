@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+</head>
+<body>
+	<img src="images/guide-add.png" style="width: 100%; height: 100%;"/>
+	
+	<script src="js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			var ws = null;
+			document.addEventListener("tap", function() {
+				var indexPage = plus.webview.getLaunchWebview();
+				mui.fire(indexPage, "showNext", {
+					
+				});
+			});
+		});
+	</script>
+</body>
+</html>

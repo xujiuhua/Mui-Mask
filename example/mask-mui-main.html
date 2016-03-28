@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/mui.min.css"/>
+    <title>主界面</title>
+</head>
+<body>
+	这是mui主界面
+	<br />
+	<input id="show-btn" type="button" value="mui显示侧滑菜单"/>
+	
+</body>
+    <script src="../js/mui.min.js"></script>
+	<script type="text/javascript">
+		var mask = mui.createMask(_closeMask);
+		mui.plusReady(function() {
+			mask.show();
+		});
+		// 此方法执行完成后，会自动关闭遮罩，
+		// return false可以阻止事件发生，不关闭遮罩
+		function _closeMask() {
+			// doSomething();
+			
+			// 注意：此处不能调用mask.close()
+			// mask.close()等价于执行了一次回调_closeMask
+			// 如此就会进入死循环
+//			mask.close();
+		}
+	</script>
+</html>
